@@ -145,6 +145,7 @@ addmargins(jatszik_szazalek)
   # nem játszik:  18
   # összesen:     63
 
+## játékosok megoszlása %-ban megadva
 round(100*prop.table(jatszik_szazalek), digits = 2)
   # jatszik:      71,43
   # nem játszik:  28,57
@@ -236,28 +237,5 @@ jatekok_piechart
 
 
 
-# valószínűségi mintavétel ----
-nonprobabilitic = df[1:63,]
-summary(nonprobabilitic)
 
-
-# adatok előkészítése a további munkához ----
-set.seed(1234)
-
-training = nonprobabilitic[1:45, -5]
-testing = nonprobabilitic[46:63, -5]
-summary(training)
-summary(testing)
-
-# lineáris regressziós modellek létrehozása ----
-
-model = lm(vasarlas_erteke~., data = training)
-summary(model)
-
-  # az eszköz, előfizetés és éz hogy játszik-e bizonyultak fontos változóknak
-
-# modell plottolása
-p = plot(training$eszkoz, training$vasarlas_erteke)
-abline(model, col="red")
-pairs.panels(df[1:63,2:5])
 
